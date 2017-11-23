@@ -1957,7 +1957,7 @@ class Pipeline:
         LOG(log_level, "Grouped compute objects:")
         for g in self.groups:
             if 'dpfusion' in self.options:
-                s = " Tile Sizes: " + str(g.tile_sizes)
+                s = " Tile sizes: " + str(g.tile_sizes)
             else:
                 s = "  "
             LOG(log_level, g.name+s)

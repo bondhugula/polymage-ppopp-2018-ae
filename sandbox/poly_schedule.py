@@ -635,22 +635,11 @@ def overlap_tile(pipeline, group, group_parts, slope_min, slope_max):
     h = get_group_height(group_parts)
     num_tile_dims = 0
     
-    #pipeline.use_different_tile_sizes = True
     if (pipeline.use_different_tile_sizes):
         _multi_level_tiling = pipeline.multi_level_tiling
         group.get_tile_sizes (pipeline.param_estimates, slope_min, slope_max, 
-                              group_parts, h, pipeline.func_map, #len(group.comps) == 2,
+                              group_parts, h, pipeline.func_map, 
                               multi_level_tiling = _multi_level_tiling)
-        #TODO: Correct this
-        if (_multi_level_tiling and ("b_gb" in str(group) or "r_r" in str(group))):
-            group.tile_sizes[0] = 20
-            group.tile_sizes[1] = 512
-            group.tile_sizes["L10"] = 6
-            group.tile_sizes["L11"] = 256
-        #group.tile_sizes["L20"] = group.tile_sizes[0]
-        #group.tile_sizes["L21"] = group.tile_sizes[1]
-        #group.tile_sizes[1] = group.tile_sizes[1]*4
-        #group.tile_sizes[0] = group.tile_sizes[0]*2
         
     no_tile_dims_set = set()
     tile_dims_set = set ()

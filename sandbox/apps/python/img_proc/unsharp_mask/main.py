@@ -31,7 +31,7 @@ def main():
             for t1 in [8, 16, 32, 64, 128, 256]:
                 for t2 in [8, 16, 32, 64, 128, 256]:
                     create_lib(build_unsharp, app, app_data, g_size, [1, t1, t2])
-                    for t in range (0, 0):
+                    for t in range (0, 5):
                         print ("Running for iteration #", t)
    
     elif app_data['mode'] == 'tune':
@@ -40,7 +40,7 @@ def main():
     else:
         create_lib(build_unsharp, app, app_data)
         min_avg = 100000
-        for i in range (0, 10000000):
+        for i in range (0, 5):
             min_avg = min (min_avg, unsharp_mask(app_data))
         
         print ("minimum average ", min_avg)
