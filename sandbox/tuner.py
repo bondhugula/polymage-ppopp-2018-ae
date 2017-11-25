@@ -453,7 +453,7 @@ def execute(_tuner_arg_data):
         dump_files.append(sys.stdout)
 
     OMP_NUM_THREADS = str(_tuner_omp_threads)
-    KMP_PLACE_THREADS = str(_tuner_omp_threads)+"c,1t"
+    KMP_HW_SUBSET = str(_tuner_omp_threads)+"c,1t"
 
     def print_params(to_file=[]):
         if len(to_file) == 0:
@@ -462,7 +462,7 @@ def execute(_tuner_arg_data):
         print_to("App name              : \""+_tuner_app_name+"\"", to_file)
         print_to("Total configurations  : "+str(_tuner_configs_count), to_file)
         print_to("OMP_NUM_THREADS       : "+OMP_NUM_THREADS, to_file)
-        print_to("KMP_PLACE_THREADS     : "+KMP_PLACE_THREADS, to_file)
+        print_to("KMP_HW_SUBSET         : "+KMP_HW_SUBSET, to_file)
         print_to("Number of tuning runs : "+str(_tuner_nruns), to_file)
 
     # set other variables
@@ -486,7 +486,7 @@ def execute(_tuner_arg_data):
 
     # set the thread-count
     os.environ["OMP_NUM_THREADS"] = OMP_NUM_THREADS
-    os.environ["KMP_PLACE_THREADS"] = KMP_PLACE_THREADS
+    os.environ["KMP_HW_SUBSET"] = KMP_HW_SUBSET
 
     # shared library function name
     lib_function_name = 'pipeline_'+_tuner_pipe.name
