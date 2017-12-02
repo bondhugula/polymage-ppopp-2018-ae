@@ -36,21 +36,15 @@ installing libffi-devel via yum/apt-get)
 **INSTALLATION**
 ```
 $ git clone git@bitbucket.org:udayb/polymage.git
-
 $ cd polymage
-
 $ git submodule update --init
-
 $ cd cgen
-
-$ sudo python3 setup.py install
-
 $ git am ../patches/0001-ctye-to-dtype-handle-void.patch
-
+$ sudo python3 setup.py install
 $ cd ..
-
+# (To build the DP-based fusion module)
+# (Set your Python version in 'Makefile')
 $ make
-(to build the DP-based fusion module)
 
 Try any of the apps in the sandbox/apps/ directory.
 
