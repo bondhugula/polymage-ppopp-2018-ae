@@ -9,7 +9,7 @@ ROOT="../../../../"
 IMG=$(ROOT)"/../images/venice_wikimedia.jpg"
 THRESH=0.001
 WEIGHT=4
-RUNS=500
+RUNS=5
 
 APP_ARGS=--img=$(IMG) --threshold=$(THRESH) --weight=$(WEIGHT)
 OPT_ARGS=--pool_alloc --optimize_storage --early_free #--inline
@@ -20,6 +20,9 @@ all: new
 
 new:
 	$(PYTHON) main.py --mode='new' $(APP_ARGS) $(OPT_ARGS) $(TOOL_ARGS) $(CXX_ARGS)
+
+dpfuse:
+	$(PYTHON) main.py --mode='new' $(APP_ARGS) $(OPT_ARGS) --dpfuse $(TOOL_ARGS) $(CXX_ARGS)
 
 tune:
 	$(PYTHON) main.py --mode='tune' $(APP_ARGS) $(OPT_ARGS) $(TOOL_ARGS) $(CXX_ARGS)

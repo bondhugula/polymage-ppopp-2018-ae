@@ -76,13 +76,6 @@ def parse_args():
                       help='True : generate .dot & .png file of pipeline graph, \
                             False: don\'t')
 
-    parser.add_option('--dpfusion', '--dpfusion',
-                      action='store_true',
-                      dest='dpfusion',
-                      default=False,
-                      help='True : Enables DP based Fusion, \
-                            False: Does Greedy based fusion')
-
     (options, args) = parser.parse_args()
 
     return options

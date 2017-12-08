@@ -79,7 +79,7 @@ def build_test_fusion(app_data, g_size = None, t_size = None):
     if app_data['multi-level-tiling']:
         opts += ['multi-level-tiling']
     
-    opts += ['dpfusion']
+    opts += ['dpfuse']
     pipe = buildPipeline(live_outs,
                          param_estimates=p_estimates,
                          param_constraints=p_constraints,

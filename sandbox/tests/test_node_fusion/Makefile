@@ -10,7 +10,7 @@ IMG=$(ROOT)"images/venice_wikimedia.jpg"
 #IMG="./venice_wikimedia.png"
 RUNS=1
 
-APP_ARGS=--img=${IMG} --dpfusion
+APP_ARGS=--img=${IMG} --dpfuse
 OPT_ARGS=--pool_alloc --optimize_storage --early_free #--multi-level-tiling #--inline
 TOOL_ARGS=--graph-gen --runs=${RUNS} --display --timer
 CXX_ARGS=--cxx="${CXX}" --cxx_flags="${CXX_FLAGS}"

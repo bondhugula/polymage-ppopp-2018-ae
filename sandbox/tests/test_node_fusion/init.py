@@ -53,7 +53,7 @@ def get_input(app_data):
     app_data['pool_alloc'] = bool(app_args.pool_alloc)
     app_data['inline']  = bool (app_args.inline)
     app_data['multi-level-tiling'] = bool(app_args.multi_level_tiling)
-    app_data['dpfusion'] = bool(app_args.dpfusion)
+    app_data['dpfuse'] = bool(app_args.dpfuse)
     
     return
 

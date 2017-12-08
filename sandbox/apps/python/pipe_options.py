@@ -71,3 +71,13 @@ parser.add_option('--multi-level-tiling',
                   default=False,
                   help='True : Enable Multi Level L2 and L1 Tiling, \
                         False: Disable Multi Level L2 and L1 Tiling')
+
+# to enable DP-based fusion
+parser.add_option('--dpfuse',
+                  action='store_true',
+                  dest='dpfuse',
+                  default=False,
+                  help='True : Enable DP-based fusion, \
+                        False: Use a greedy fusion heuristic')
+
+

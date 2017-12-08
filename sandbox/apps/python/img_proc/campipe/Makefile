@@ -23,6 +23,9 @@ all: new
 new:
 	$(PYTHON) main.py --mode='new' $(APP_ARGS) $(OPT_ARGS) $(TOOL_ARGS) $(CXX_ARGS)
 
+dpfuse:
+	$(PYTHON) main.py --mode='new' $(APP_ARGS) $(OPT_ARGS) --dpfuse $(TOOL_ARGS) $(CXX_ARGS)
+
 tune:
 	$(PYTHON) main.py --mode='tune' $(APP_ARGS) $(OPT_ARGS) $(TOOL_ARGS) $(CXX_ARGS)
 tune+:

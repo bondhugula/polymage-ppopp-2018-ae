@@ -1910,7 +1910,7 @@ class Pipeline:
             # Run the grouping algorithm
             #TESTING HERE
             self.initialize_storage()
-            if 'dpfusion' in self.options:
+            if 'dpfuse' in self.options:
                 auto_group_dp(self)
             else:
                 auto_group_greedy(self)
@@ -1956,7 +1956,7 @@ class Pipeline:
         LOG(log_level, "\n\n")
         LOG(log_level, "Grouped compute objects:")
         for g in self.groups:
-            if 'dpfusion' in self.options:
+            if 'dpfuse' in self.options:
                 s = " Tile sizes: " + str(g.tile_sizes)
             else:
                 s = "  "

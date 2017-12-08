@@ -8,7 +8,7 @@ ROOT="../../../../"
 # app inputs
 IMG=$(ROOT)"/../images/venice_wikimedia.jpg"
 #IMG="./venice_wikimedia.png"
-RUNS=500
+RUNS=3
 
 APP_ARGS=--img=${IMG}
 OPT_ARGS=--pool_alloc --optimize_storage --early_free #--multi-level-tiling #--inline
@@ -20,10 +20,15 @@ all: new
 new:
 	$(PYTHON) main.py --mode='new' ${CXX_ARGS} $(OPT_ARGS) ${APP_ARGS} ${TOOL_ARGS}
 
+dpfuse:
+	$(PYTHON) main.py --mode='new' ${CXX_ARGS} $(OPT_ARGS) --dpfuse ${APP_ARGS} ${TOOL_ARGS}
+
 tune:
 	$(PYTHON) main.py --mode='tune' ${CXX_ARGS} $(OPT_ARGS) ${APP_ARGS} ${TOOL_ARGS}
+
 tune+:
 	$(PYTHON) main.py --mode='tune+' $(APP_ARGS) $(OPT_ARGS) $(TOOL_ARGS) $(CXX_ARGS)
+
 existing:
 	$(PYTHON) main.py --mode='existing' ${CXX_ARGS} ${APP_ARGS} ${TOOL_ARGS}
 
