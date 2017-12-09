@@ -1,4 +1,4 @@
-VERSION=3.5
+VERSION=3.6
 
 INCLUDES=-I/usr/include/python$(VERSION)m/ 
 CPPFLAGS=-shared -lpython3 -fPIC -std=c++11 -Wall
