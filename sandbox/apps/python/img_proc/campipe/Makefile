@@ -11,7 +11,7 @@ IMG=$(ROOT)"/../images/bayer_raw.png"
 KELVIN=3700
 CONTRAST=50
 GAMMA=2.0
-RUNS=500
+RUNS=10
 
 APP_ARGS=--img=$(IMG) --colour_temp=$(KELVIN) --contrast=$(CONTRAST) --gamma=$(GAMMA)
 OPT_ARGS=--pool_alloc --optimize_storage --early_free #--multi-level-tiling --inline

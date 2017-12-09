@@ -35,11 +35,12 @@ def main():
     else:
         create_lib(build_interpolate, app, app_data)
         _min_time = 10000
-        for t in range(0, 5):
-            _min_time = min (_min_time, interpolate(app_data))
-        print ("Minimum Time = ", _min_time)
-
-
+        outer_runs = 5
+        for t in range(0, outer_runs):
+            min_avg = min (min_avg, interpolate(app_data))
+        
+        print ("[main] Minimum of averaged times across ", outer_runs,
+                "runs: ", min_avg, " ms")
 
     return
 

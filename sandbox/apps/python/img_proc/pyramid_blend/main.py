@@ -35,9 +35,11 @@ def main():
     else:
         create_lib(build_pyramid, app, app_data)
         min_avg = 100000
-        for r in range (0,5):
+        outer_runs = 5
+        for r in range (0, outer_runs):
             min_avg = min (min_avg, pyramid_blending(app_data))
-        print ("Minimum Average Time ", min_avg)
+        print ("[main] Minimum of averaged times across ", outer_runs,
+                "runs: ", min_avg, " ms")
 
     return
 

@@ -8,7 +8,7 @@ ROOT="../../../.."
 # app inputs
 IMG1=$(ROOT)"/../images/grand_canyon1.jpg"
 IMG2=$(ROOT)"/../images/grand_canyon2.jpg"
-RUNS=500
+RUNS=10
 
 APP_ARGS=--img1=${IMG1} --img2=${IMG2}
 OPT_ARGS=--pool_alloc --optimize_storage --early_free #--multi-level-tiling
