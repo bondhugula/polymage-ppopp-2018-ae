@@ -14,7 +14,7 @@ RUNS=500
 
 APP_ARGS=--img=${IMG} --patch_size=${PATCH_SIZE} --search_area=${SEARCH_AREA} -d
 #APP_ARGS=--img=${IMG} --alpha=${ALPHA} --patch_size=${PATCH_SIZE} --search_area=${SEARCH_AREA}
-OPT_ARGS=--pool_alloc --optimize_storage --early_free
+OPT_ARGS=--pool-alloc --optimize-storage --early-free
 TOOL_ARGS=--graph-gen --runs=${RUNS} --display --timer
 CXX_ARGS=--cxx="${CXX}" --cxx_flags="${CXX_FLAGS}" 
 

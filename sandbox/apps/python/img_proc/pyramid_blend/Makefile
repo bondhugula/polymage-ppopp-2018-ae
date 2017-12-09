@@ -11,7 +11,7 @@ IMG2=$(ROOT)"/../images/grand_canyon2.jpg"
 RUNS=10
 
 APP_ARGS=--img1=${IMG1} --img2=${IMG2}
-OPT_ARGS=--pool_alloc --optimize_storage --early_free #--multi-level-tiling
+OPT_ARGS=--pool-alloc --optimize-storage --early-free #--multi-level-tiling
 TOOL_ARGS=--graph-gen --runs=${RUNS} --display --timer
 CXX_ARGS=--cxx="${CXX}" --cxx_flags="${CXX_FLAGS}"
 

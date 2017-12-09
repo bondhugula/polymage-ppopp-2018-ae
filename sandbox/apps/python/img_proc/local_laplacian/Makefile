@@ -12,8 +12,8 @@ ALPHA=1
 BETA=1
 
 APP_ARGS=--img=${IMG} --alpha=${ALPHA} --beta=${BETA}
-OPT_ARGS=--pool_alloc --optimize_storage --early_free
-#OPT_ARGS=--pool_alloc --early_free
+OPT_ARGS=--pool-alloc --optimize-storage --early-free
+#OPT_ARGS=--pool-alloc --early-free
 TOOL_ARGS=--graph-gen --runs=${RUNS} --display --timer
 CXX_ARGS=--cxx="${CXX}" --cxx_flags="${CXX_FLAGS}"
 

@@ -12,7 +12,7 @@ WEIGHT=4
 RUNS=5
 
 APP_ARGS=--img=$(IMG) --threshold=$(THRESH) --weight=$(WEIGHT)
-OPT_ARGS=--pool_alloc --optimize_storage --early_free #--inline
+OPT_ARGS=--pool-alloc --optimize-storage --early-free #--inline
 TOOL_ARGS=--graph-gen --display --runs=$(RUNS) --timer
 CXX_ARGS=--cxx="$(CXX)" --cxx_flags="$(CXX_FLAGS)"
 

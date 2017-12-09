@@ -11,7 +11,7 @@ IMG=$(ROOT)"/../images/gray.png"
 RUNS=500
 
 APP_ARGS=--img=${IMG}
-OPT_ARGS=--pool_alloc --optimize_storage --early_free
+OPT_ARGS=--pool-alloc --optimize-storage --early-free
 TOOL_ARGS=--graph-gen --runs=${RUNS} --display --timer #--multi-level-tiling
 CXX_ARGS=--cxx="${CXX}" --cxx_flags="${CXX_FLAGS}"
 

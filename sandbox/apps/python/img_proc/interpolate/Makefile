@@ -11,7 +11,7 @@ ALPHA=$(ROOT)"/../images/alpha.png"
 RUNS=500
 
 APP_ARGS=--img=${IMG} --alpha=${ALPHA}
-OPT_ARGS=--pool_alloc --optimize_storage --early_free #--multi-level-tiling
+OPT_ARGS=--pool-alloc --optimize-storage --early-free #--multi-level-tiling
 TOOL_ARGS=--graph-gen --runs=${RUNS} --display --timer
 CXX_ARGS=--cxx="${CXX}" --cxx_flags="${CXX_FLAGS}"
 

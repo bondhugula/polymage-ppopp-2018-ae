@@ -4,10 +4,10 @@ parser = optparse.OptionParser()
 
 # Storage Optimization takes care of reusing arrays associated with different
 # Functions. Enabling this optimization leads to reuse of arrays after a point
-# in the program, where the function is no more used.
+# in the program where the function output is not live.
 help_str = 'True : Optimize for storage, by reusing arrays if possible, \
             False: Create separate array for each Function'
-parser.add_option('--optimize_storage',
+parser.add_option('--optimize-storage',
                   action='store_true',
                   dest='optimize_storage',
                   default=False,
@@ -29,7 +29,7 @@ parser.add_option('--flatten_scratchpad',
 # away all unwanted arrays from the memory as soon as possible.
 help_str =  'True : Free the arrays not in use as soon as possible, \
              False: Procrastinated freeing of arrays'
-parser.add_option('--early_free',
+parser.add_option('--early-free',
                   action='store_true',
                   dest='early_free',
                   default=False,
@@ -38,7 +38,7 @@ parser.add_option('--early_free',
 # Use a pool of memory, so that allocation from pool can return the pointer to
 # an already allocated array, thus resulting in avoiding frequent malloc()
 # calls across allocations / iterations of program
-parser.add_option('--pool_alloc',
+parser.add_option('--pool-alloc',
                   action='store_true',
                   dest='pool_alloc',
                   default=False,

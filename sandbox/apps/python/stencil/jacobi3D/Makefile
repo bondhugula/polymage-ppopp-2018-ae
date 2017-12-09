@@ -11,7 +11,7 @@ SIZE=128  # grid size along each dimension
 STEPS=10
 
 APP_ARGS=--runs=$(RUNS) --N=$(SIZE) --T=$(STEPS)
-OPT_ARGS=--pool_alloc --optimize_storage --early_free --multipar
+OPT_ARGS=--pool-alloc --optimize-storage --early-free --multipar
 TOOL_ARGS=--graph-gen --runs=$(RUNS) --timer
 CXX_ARGS=--cxx="$(CXX)" --cxx_flags="$(CXX_FLAGS)"
 
