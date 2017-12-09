@@ -40,10 +40,12 @@ def main():
     else:
         create_lib(build_unsharp, app, app_data)
         min_avg = 100000
-        for i in range (0, 5):
+        outer_runs = 5;
+        for i in range (0, outer_runs):
             min_avg = min (min_avg, unsharp_mask(app_data))
         
-        print ("minimum average ", min_avg)
+        print ("[main] Minimum of averaged times across ", outer_runs,
+                "runs: ", min_avg, " ms")
 
     return
 

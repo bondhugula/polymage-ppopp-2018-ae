@@ -51,10 +51,11 @@ def harrispipe(app_data):
 
         time_taken = float(t2) - float(t1)
         avg += time_taken
-        print("")
-        print("[exec_pipe] : time taken to execute = ", (time_taken * 1000), " ms")
+        # print("")
+        # print("[exec_pipe] time taken to execute = ",
+        #        (time_taken * 1000), " ms")
 
         it += 1
 
-    print ("average time ", avg/runs*1000, " ms")
+    print ("[exec_pipe] Average time across ", runs, " runs: ", avg/runs*1000, " ms")
     return avg/runs*1000
