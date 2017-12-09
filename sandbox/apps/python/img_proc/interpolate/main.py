@@ -34,7 +34,7 @@ def main():
         pass
     else:
         create_lib(build_interpolate, app, app_data)
-        _min_time = 10000
+        min_avg = 10000
         outer_runs = 5
         for t in range(0, outer_runs):
             min_avg = min (min_avg, interpolate(app_data))

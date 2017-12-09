@@ -55,6 +55,7 @@ def bilateralgrid(app_data):
 
         it += 1
 
-    print ("average time ", avg/runs*1000, " ms")
+    print ("[exec_pipe] Average time across ", runs, " runs: ", avg/runs*1000, " ms")
+
     
     return avg/runs*1000

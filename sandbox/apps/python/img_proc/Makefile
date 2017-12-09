@@ -10,6 +10,11 @@ all:
 		make -C $$d $@; \
 		done
 
+dpfuse: 
+	@-for d in $(APPS); do \
+		make -C $$d $@; \
+		done
+
 clean:
 	@-for d in $(APPS); do \
 		make -C $$d clean; \
