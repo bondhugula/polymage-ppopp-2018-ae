@@ -81,6 +81,11 @@ def build_unsharp(app_data, g_size = None, t_size = None):
     if app_data['dpfuse']:
         opts += ['dpfuse']
     
+    if app_data['logdpchoices']:
+        opts += ['logdpchoices']
+    if app_data['logmaxchildren']:
+        logmaxchildren = app_data['logmaxchildren']
+
     pipe = buildPipeline(live_outs,
                          param_estimates=p_estimates,
                          param_constraints=p_constraints,
@@ -88,7 +93,7 @@ def build_unsharp(app_data, g_size = None, t_size = None):
                          group_size = g_size,
                          options = opts,
                          pipe_name = pipe_name,
-                         inline_directives = inline_func)
+                         logMaxChildren = logmaxchildren)
 
     return pipe
 

@@ -31,6 +31,8 @@
 
 bool const checkForAssertions = false;
 bool const checkPythonExceptions = true;
+bool printDPFusionTimeAndChoices = false;
+
 static bool INLINING_ENABLED = false;
 static bool MULTI_LEVEL_TILING_ENABLED = false;
 
@@ -251,7 +253,7 @@ using boost::multiprecision::uint128_t;
 using namespace boost;
 using namespace std;
 uint64_t logMaxChildren = 3;
-const uint64_t log_increment_factor = 1;
+uint64_t log_increment_factor = 1;
 PyObject* reduction_cls;
 PyObject* small_comps;
 PyObject* comp_size_map;
@@ -1730,6 +1732,7 @@ inline uint64_t cost (uint128_t hash_id, std::vector <uint64_t>& tile_sizes)
     uint64_t liveins_size = 0;
     std::vector <std::vector <uint64_t> > dim_size_diff; // 2-D vector with rows as number of comps and cols as max_dim
     uint64_t tile_size = 0;
+    uint64_t totalsizeused = 0;
     std::unordered_set<Group*, Group::GroupHasher> inlined_groups;
     InlinedAdjacentType new_nextGroups;
     InlinedAdjacentType new_prevGroups;
@@ -1851,59 +1854,77 @@ inline uint64_t cost (uint128_t hash_id, std::vector <uint64_t>& tile_sizes)
         }
     }
     
-    if (INLINING_ENABLED)
-        update_graph_with_inlining (inlined_groups, new_nextGroups, 
-                                    new_prevGroups, hash_id);
-    
-    for (auto &it : new_nextGroups)
+    if (!printDPFusionTimeAndChoices)
     {
-        Group* g = it.first;
+        if (INLINING_ENABLED)
+            update_graph_with_inlining (inlined_groups, new_nextGroups, 
+                                        new_prevGroups, hash_id);
         
-        for (auto &next : it.second)
+        for (auto &it : new_nextGroups)
         {
-            if ((hash_id & g->hashID ()) == g->hashID () && 
-                (hash_id & next->hashID ()) == next->hashID () &&
-                get_n_dimensions (g->getPyGroup ()) < get_n_dimensions (next->getPyGroup ()))
+            Group* g = it.first;
+            
+            for (auto &next : it.second)
             {
-                
-                return -1;
+                if ((hash_id & g->hashID ()) == g->hashID () && 
+                    (hash_id & next->hashID ()) == next->hashID () &&
+                    get_n_dimensions (g->getPyGroup ()) < get_n_dimensions (next->getPyGroup ()))
+                {
+                    
+                    return -1;
+                }
             }
         }
+        
+        totalsizeused = getTotalSizeUsed (hash_id, n_buffers, 
+                                           liveouts_size, liveins_size,
+                                           inlined_groups, new_nextGroups, 
+                                           new_prevGroups);
     }
     
-    uint64_t totalsizeused = getTotalSizeUsed (hash_id, n_buffers, 
-                                               liveouts_size, liveins_size,
-                                               inlined_groups, new_nextGroups, 
-                                               new_prevGroups);
-    
+    int64_t mean_dim_diff = dim_size_std_dev (dim_size_diff, max_dims);
+
     PRINT_DEBUG_BLOCK_L1
         std::cout << "n_buffers " << n_buffers << std::endl;
     PRINT_DEBUG_BLOCK_L1
         std::cout<< "totalsizeused " << totalsizeused << std::endl;
     
-    if (totalsizeused == 0 && n_buffers == 0)
+    if (!printDPFusionTimeAndChoices)
     {
-        //Dummy group
-        return 0;
+        if (totalsizeused == 0 && n_buffers == 0)
+        {
+            //Dummy group
+            return 0;
+        }
+        
+        _hash_id = hash_id;
+        
+        if ((is_reduction || is_const_grp || is_small_grp || is_tstencil_grp || is_dummy_source_group) && nOnes == 1)
+            return 1L;
+        
+        if (is_reduction || is_const_grp || is_small_grp || is_tstencil_grp || is_dummy_source_group)
+            return -1;
+    
+        if (total_comps > grp_size)
+            return -1;
+        
+        if (is_dummy_source_group)
+            return -1;
+            
+        if (nOnes == 1)
+            return INT_MAX;
     }
     
-    _hash_id = hash_id;
-    
-    if ((is_reduction || is_const_grp || is_small_grp || is_tstencil_grp || is_dummy_source_group) && nOnes == 1)
-        return 1L;
-    
-    if (is_reduction || is_const_grp || is_small_grp || is_tstencil_grp || is_dummy_source_group)
-        return -1;
-    
-    if (total_comps > grp_size)
-        return -1;
-    
-    if (is_dummy_source_group)
-        return -1;
+    if (printDPFusionTimeAndChoices)
+    {
+        if ((is_reduction || is_const_grp || is_small_grp || is_tstencil_grp) && nOnes == 1)
+            return 1L;
         
-    if (nOnes == 1)
-        return INT_MAX;
-    
+        if (is_reduction)
+            return -1;
+            
+        return 1L;
+    }
     
     #define INCLUDE_OVERLAP
     #ifdef INCLUDE_OVERLAP
@@ -1960,8 +1981,6 @@ inline uint64_t cost (uint128_t hash_id, std::vector <uint64_t>& tile_sizes)
     PRINT_DEBUG_BLOCK_L1
         std::cout<< "totalsizeused " << totalsizeused << " tile_size for " << std::bitset<41>((uint64_t)_hash_id)<<" " << tile_size << " liveins_size " << liveins_size <<std::endl;
     
-    int64_t mean_dim_diff = dim_size_std_dev (dim_size_diff, max_dims);
-
     n_threads = totalsizeused/(tile_size*n_buffers);
     PRINT_DEBUG_BLOCK_L1
         std::cout << "_cost mean_dim_diff " << mean_dim_diff << " liveins_size " << liveins_size << " liveouts_size " << liveouts_size << " live ratio " << (liveins_size+liveouts_size)/(tile_size*n_buffers) <<
@@ -1991,7 +2010,7 @@ inline uint64_t cost (uint128_t hash_id, std::vector <uint64_t>& tile_sizes)
     
     if (total_comps <= grp_size)
     {
-       return _cost;
+        return _cost;
     }
     
     return -1;
@@ -2253,7 +2272,7 @@ inline uint64_t cfgMemoize (uint128_t hash_id)
         foundInDict += 1;
         return g->second;
     }
-    
+
     PRINT_DEBUG_L2 (std::cout<<"to get next groups "<< std::bitset<41>((uint64_t)hash_id)<<std::endl);
     n = OptGroup::nextGroupsHashID (hash_id);
     
@@ -2265,7 +2284,7 @@ inline uint64_t cfgMemoize (uint128_t hash_id)
         hashIDToOptHashID[hash_id] = hash_id;
         uint64_t _cost = cost(hash_id, tile_sizes);
         optHashIDToTileSizes [hash_id] = tile_sizes;
-        
+        T[hash_id] = _cost;
         if (hash_id && (!(hash_id & (hash_id-1))))
             return _cost;
             
@@ -2926,12 +2945,14 @@ PyObject* dpgroup(PyObject* self, PyObject* args)
     PyObject *groups;    
     PyObject *do_inline;
     PyObject *multi_level_tiling;
+    PyObject *_printDPFusionTimeAndChoices;
+    int _logMaxChildren;
     
     std::vector <PyObject*> pygroups_vector;
     
     std::cerr<<"Running DP Fusion " << std::endl;
     
-    PyArg_ParseTuple (args, "OOOOOOOOOOOOOOOOllllffff", &in_group, &out_group, &groups, &pipeline, 
+    PyArg_ParseTuple (args, "OOOOOOOOOOOOOOOOllllffffOl", &in_group, &out_group, &groups, &pipeline, 
                       &reduction_cls, &small_comps, &comp_size_map, &tstencil_cls,
                       &pygroup_topological_order, &pygroup_dim_reuse, &pylive_size,
                       &pydim_size, &storage_mapping_get_dim_size, &cls_Storage, 
@@ -2941,7 +2962,9 @@ PyObject* dpgroup(PyObject* self, PyObject* args)
                       &L1_CACHE_SIZE, &L2_CACHE_SIZE, &N_CORES, &IMAGE_ELEMENT_SIZE,
                       //Weights
                       &DIM_STD_DEV_WEIGHT, &LIVE_SIZE_TO_TILE_SIZE_WEIGHT, 
-                      &CLEANUP_THREADS_WEIGHT, &RELATIVE_OVERLAP_WEIGHT);
+                      &CLEANUP_THREADS_WEIGHT, &RELATIVE_OVERLAP_WEIGHT,
+                      &_printDPFusionTimeAndChoices,
+                      &_logMaxChildren);
     
     std::cerr << "Machine Information:" << std::endl << 
     "L1_CACHE_SIZE       "<< L1_CACHE_SIZE      << " Bytes" << std::endl <<
@@ -2958,6 +2981,15 @@ PyObject* dpgroup(PyObject* self, PyObject* args)
     get_overlapping_size_func = PyObject_GetAttr (pipeline, 
                                                   Py_BuildValue ("s", 
                                                   "get_overlapping_size_for_groups"));
+    if (_printDPFusionTimeAndChoices == Py_True)
+    {
+        printDPFusionTimeAndChoices = true;
+        logMaxChildren = _logMaxChildren;
+        log_increment_factor = 10;
+    }
+    else
+        printDPFusionTimeAndChoices = false;
+        
     if (do_inline == Py_True)
         INLINING_ENABLED = true;
     else if (do_inline == Py_False)
@@ -3170,7 +3202,7 @@ PyObject* dpgroup(PyObject* self, PyObject* args)
     {
         std::cout << "Group size " << grp_size << std::endl;
     }
-    
+
     uint64_t max_group_size = 1UL << logMaxChildren;
     uint128_t start_hash_id = opt_start->hashID();
        
@@ -3194,13 +3226,22 @@ PyObject* dpgroup(PyObject* self, PyObject* args)
         }
     }
     
+    clock_t t1 = clock ();
+    uint64_t dpChoices = 0;
+    
     while (iteration == 0 || max_group_size <= _maxID)
     {
         if (iteration != 0)
             clear_everything ();
 
         cfgMemoize (start_hash_id);
-
+        dpChoices += T.size ();
+        
+        //for (auto it = T.begin(); it != T.end (); it++)
+        //{
+            //std::cout << std::bitset<41> ((uint64_t)it->first) << "  " << ((uint64_t)it->second) << std::endl;
+        //}
+        
         for (auto it = hashIDToOptHashID.begin(); it != hashIDToOptHashID.end(); it++)
         {
             PRINT_DEBUG_L2 (std::cout<< std::bitset <41>((uint64_t)it->first) <<
@@ -3286,6 +3327,15 @@ PyObject* dpgroup(PyObject* self, PyObject* args)
         iteration++;
         logMaxChildren += log_increment_factor;
         max_group_size = 1 << logMaxChildren;
+    }
+    
+    if (printDPFusionTimeAndChoices)
+    {
+        clock_t t2 = clock ();
+        
+        std::cout << "Time Taken by DPFusion: " << (t2-t1)*1000.0/CLOCKS_PER_SEC << " ms" << std::endl; 
+        std::cout << "Choices Evaluated by DPFusion: " << dpChoices << std::endl;
+        exit (EXIT_SUCCESS);
     }
     
     PRINT_DEBUG_L1 (std::cin>>iteration);

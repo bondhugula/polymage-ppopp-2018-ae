@@ -1,4 +1,4 @@
-VERSION=3.6
+VERSION=3.5
 
 INCLUDES=-I/usr/include/python$(VERSION)m/ 
 CPPFLAGS=-shared -lpython3 -fPIC -std=c++11 -Wall
@@ -19,7 +19,7 @@ debug3:	sandbox/dpfusion/dpfusion.cpp
 	g++ -D DEBUG=3 $(INCLUDES) $(CPPFLAGS) -O3 -o sandbox/dpfusion.so $< $(LDFLAGS)
 
 gdbdebug: sandbox/dpfusion/dpfusion.cpp
-	g++ -g -D DEBUG=3 $(INCLUDES) $(CPPFLAGS) -O0 -o $sandbox/dpfusion.so $< $(LDFLAGS)
+	g++ -g -D DEBUG=0 $(INCLUDES) $(CPPFLAGS) -O0 -o sandbox/dpfusion.so $< $(LDFLAGS)
 
 clean:
 	rm -f sandbox/dpfusion.so

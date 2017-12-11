@@ -1803,7 +1803,7 @@ class Pipeline:
                  _param_estimates, _param_constraints,
                  _grouping, _group_size, _inline_directives,
                  _tile_sizes, _size_threshold,
-                 _options, _name = None):
+                 _options, _name = None, _logMaxChildren = 3):
         # Name of the pipleline is a concatenation of the names of the 
         # pipeline outputs, unless it is explicitly named.
         if _name is None:
@@ -1823,7 +1823,8 @@ class Pipeline:
         self._tile_sizes = _tile_sizes
         self._dim_reuse = {}
         self._do_inline = 'inline' in self._options
-
+        self._logMaxChildren = _logMaxChildren
+        
         ''' CONSTRUCT DAG '''
         # Maps from a compute object to its parents and children by
         # backtracing starting from given live-out functions.
@@ -2114,6 +2115,9 @@ class Pipeline:
         
         inline_pass (self, self._pre_grouping_inline_groups)
     
+    @property
+    def logMaxChildren (self):
+        return self._logMaxChildren
     @property
     def multi_level_tiling (self):
         return "multi-level-tiling" in self._options

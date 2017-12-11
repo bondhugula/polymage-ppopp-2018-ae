@@ -70,6 +70,8 @@ def get_input(app_data):
     app_data['inline'] = bool (app_args.inline)
     app_data['multi-level-tiling'] = bool(app_args.multi_level_tiling)
     app_data['dpfuse'] = bool(app_args.dpfuse)
+    app_data['logdpchoices'] = bool(app_args.logdpchoices)
+    app_data['logmaxchildren'] = int(app_args.logmaxchildren)
     return
 
 def init_all(app_data):

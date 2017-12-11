@@ -80,6 +80,10 @@ def build_harris(app_data, g_size = None, t_size = None):
         opts += ['multi-level-tiling']
     if app_data['dpfuse']:
         opts += ['dpfuse']
+    if app_data['logdpchoices']:
+        opts += ['logdpchoices']
+    if app_data['logmaxchildren']:
+        logmaxchildren = app_data['logmaxchildren']
 
     pipe = buildPipeline(live_outs,
                          param_estimates=p_estimates,
@@ -88,7 +92,7 @@ def build_harris(app_data, g_size = None, t_size = None):
                          group_size = g_size,
                          options = opts,
                          pipe_name = pipe_name,
-                         inline_directives=inlines)
+                         logMaxChildren = logmaxchildren)
 
     return pipe
 

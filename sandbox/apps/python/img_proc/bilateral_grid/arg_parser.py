@@ -74,6 +74,7 @@ def parse_args():
                        default=False,
                        help='True : generate .dot file of pipeline graph, \
                              False: don\'t')
+                            
 
     (options, args) = parser.parse_args()
 
