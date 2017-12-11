@@ -1,7 +1,7 @@
 VERSION=3.5
 
 INCLUDES=-I/usr/include/python$(VERSION)m/ 
-CPPFLAGS=-shared -lpython3 -fPIC -std=c++11 -Wall
+CPPFLAGS=-shared -lpython$(VERSION)m -fPIC -std=c++11 -Wall
 LDFLAGS=-lboost_system 
 
 all: sandbox/dpfusion.so
