@@ -153,7 +153,7 @@ def auto_group_dp(pipeline):
     
     w_args = [pipeline.do_inline, False, pipeline.multi_level_tiling]
     elem_size = pipeline.MachineInformation.get_machine_image_element_size ();
-
+    
     import dpfusion
     dpfusion.dpgroup (in_group, out_group, pipeline.groups, pipeline, 
                        Reduction, small_comps, comp_size_map, TStencil,
@@ -169,7 +169,10 @@ def auto_group_dp(pipeline):
                        pipeline.MachineInformation.get_dim_std_dev_weight (*w_args),
                        pipeline.MachineInformation.get_live_to_tile_size_weight (*w_args),
                        pipeline.MachineInformation.get_cleanup_threads_weight (*w_args),
-                       pipeline.MachineInformation.get_relative_overlap_weight (*w_args))
+                       pipeline.MachineInformation.get_relative_overlap_weight (*w_args),
+                       #just print dp time and choices
+                       'logdpchoices' in pipeline.options,
+                       pipeline.logMaxChildren)
 
     return
 

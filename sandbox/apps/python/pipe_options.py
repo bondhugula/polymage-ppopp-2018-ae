@@ -80,4 +80,15 @@ parser.add_option('--dpfuse',
                   help='True : Enable DP-based fusion, \
                         False: Use a greedy fusion heuristic')
 
-
+parser.add_option('--logdpchoices',
+                  action='store_true',
+                  dest='logdpchoices',
+                  default=False,
+                  help='True: Print the number of dp choices, \
+                        False: don\'t')
+parser.add_option('--logmaxchildren',
+                  action='store',
+                  dest='logmaxchildren',
+                  default=3,
+                  help='Set the max children in first iteration of Bounded Grouping Algorithm')
+      

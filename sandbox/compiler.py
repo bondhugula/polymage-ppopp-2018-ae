@@ -39,7 +39,8 @@ def buildPipeline(outputs,
                   tile_sizes = [],
                   size_threshold = None,
                   pipe_name = None,
-                  options = []):
+                  options = [],
+                  logMaxChildren = 3):
 
     # Create an isl context that will be used for all polyhedral
     # operations during compilation.
@@ -77,4 +78,5 @@ def buildPipeline(outputs,
                          _tile_sizes = tile_sizes,
                          _size_threshold = size_threshold,
                          _name = pipe_name,
-                         _options = options)
+                         _options = options,
+                         _logMaxChildren = logMaxChildren)

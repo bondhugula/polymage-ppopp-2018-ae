@@ -80,14 +80,19 @@ def build_pyramid(app_data, g_size = None, t_size = None):
         opts += ['multi-level-tiling']
     if app_data['dpfuse']:
         opts += ['dpfuse']
+    if app_data['logdpchoices']:
+        opts += ['logdpchoices']
+    if app_data['logmaxchildren']:
+        logmaxchildren = app_data['logmaxchildren']
+
     pipe = buildPipeline(live_outs,
                          param_estimates=p_estimates,
                          param_constraints=p_constraints,
                          tile_sizes = t_size,
                          group_size = g_size,
                          options = opts,
-                         pipe_name = pipe_name)
-
+                         pipe_name = pipe_name,
+                         logMaxChildren = logmaxchildren)
     return pipe
 
 def create_lib(build_func, pipe_name, app_data, g_size = None, t_size = None):

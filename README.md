@@ -5,7 +5,7 @@ the LICENSE file for details.
 
 **REQUIREMENTS**
 
-1) Python 3.x
+1) Python 3.4 or higher
 
 2) Python packages numpy, pytest. These can be installed via  
 (on a Fedora) $ sudo yum -y install python3-numpy python3-pytest  
@@ -48,7 +48,7 @@ $ make
 
 Try any of the apps in the sandbox/apps/ directory.
 
-[Optional (needed for diamond tiling with multigrid)]
+[Optional] Required for diamond tiling with Multigrid
 
 $ cd libpluto/
 

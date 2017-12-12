@@ -23,6 +23,18 @@ new:
 
 dpfuse:
 	$(PYTHON) main.py --mode='new' $(APP_ARGS) $(OPT_ARGS) --dpfuse $(TOOL_ARGS) $(CXX_ARGS)
+	
+dpfusechoices8:
+	$(PYTHON) main.py --mode='new' ${CXX_ARGS} $(OPT_ARGS) --dpfuse --logdpchoices --logmaxchildren=3 ${APP_ARGS} ${TOOL_ARGS}
+
+dpfusechoices16:
+	$(PYTHON) main.py --mode='new' ${CXX_ARGS} $(OPT_ARGS)  --dpfuse --logdpchoices --logmaxchildren=4 ${APP_ARGS} ${TOOL_ARGS}
+
+dpfusechoices32:
+	$(PYTHON) main.py --mode='new' ${CXX_ARGS} $(OPT_ARGS)  --dpfuse --logdpchoices --logmaxchildren=5 ${APP_ARGS} ${TOOL_ARGS}
+
+dpfusechoices:
+	$(PYTHON) main.py --mode='new' ${CXX_ARGS} $(OPT_ARGS)  --dpfuse --logdpchoices --logmaxchildren=10 ${APP_ARGS} ${TOOL_ARGS}
 
 tune:
 	$(PYTHON) main.py --mode='tune' $(APP_ARGS) $(OPT_ARGS) $(TOOL_ARGS) $(CXX_ARGS)
@@ -41,3 +53,4 @@ clean:
 
 cleaner:
 	rm -rf *.pyc *.so *.dot *.png __pycache__ *.cpp
+
