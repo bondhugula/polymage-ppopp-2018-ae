@@ -3333,8 +3333,8 @@ PyObject* dpgroup(PyObject* self, PyObject* args)
     {
         clock_t t2 = clock ();
         
-        std::cout << "Time Taken by DPFusion: " << (t2-t1)*1000.0/CLOCKS_PER_SEC << " ms" << std::endl; 
-        std::cout << "Choices Evaluated by DPFusion: " << dpChoices << std::endl;
+        std::cout << "Time taken by DP-Fusion: " << (t2-t1)*1000.0/CLOCKS_PER_SEC << " ms" << std::endl; 
+        std::cout << "Number of choices evaluated by DP-Fusion: " << dpChoices << std::endl;
         exit (EXIT_SUCCESS);
     }
     
