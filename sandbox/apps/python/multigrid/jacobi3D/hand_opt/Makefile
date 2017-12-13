@@ -17,7 +17,7 @@ DEPS := src/grid.h src/utils.h src/grid.h src/intergrid.h src/smoothers.h
 #NUC:=0 # corase-smoothing steps
 
 CFLAGS := -O3 -fopenmp -march=native -ftree-vectorize -msse3 -Wno-write-strings -Wno-unused-result
-#CFLAGS := -O3 -openmp -xhost -ipo
+#CFLAGS := -O3 -qopenmp -xhost -ipo
 #LDFLAGS := -lm
 
 all: mgm mgm-pluto

@@ -17,7 +17,7 @@ NU2:=0 # post-smoothing steps
 NUC:=0 # corase-smoothing steps
 
 CFLAGS := -O3 -fopenmp -march=native -ftree-vectorize -msse3 -Wno-write-strings -Wno-unused-result
-#CFLAGS := -O3 -openmp -xhost -ipo
+#CFLAGS := -O3 -qopenmp -xhost -ipo
 #LDFLAGS := -lm
 
 all: mgm mgm-pluto
