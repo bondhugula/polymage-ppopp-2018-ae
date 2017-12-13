@@ -1,7 +1,7 @@
-#CXX=icpc
-#CXX_FLAGS=-openmp -ipo -O3 -xhost #-no-vec
-CXX=g++
-CXX_FLAGS=-fopenmp -O3 -march=native -ftree-vectorize -funroll-loops
+CXX=icpc
+CXX_FLAGS=-openmp -ipo -O3 -xhost #-no-vec
+#CXX=g++
+#CXX_FLAGS=-fopenmp -O3 -march=native -ftree-vectorize -funroll-loops
 PYTHON=python3
 ROOT="../../../../"
 
