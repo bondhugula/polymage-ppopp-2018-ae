@@ -6,7 +6,7 @@ PYTHON=python3
 ROOT="../../../../"
 
 # app inputs
-IMG=$(ROOT)"/../images/gray.png"
+IMG=$(ROOT)"/../images/venice_wikimedia.jpg"
 #IMG="./gray.png"
 RUNS=10
 
