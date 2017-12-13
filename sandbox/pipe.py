@@ -1829,7 +1829,8 @@ class Pipeline:
         #Choose correct MachineType
         if ('CPU' in os.environ):
             if (str.lower(os.environ['CPU']) == 'xeon' or \
-                str.lower(os.environ['CPU']) == 'intel'):
+                str.lower(os.environ['CPU']) == 'intel' or \
+                str.lower(os.environ['CPU']) == 'haswell'):
                 MACHINE_TYPE = 'polymage'
             elif (str.lower(os.environ['CPU']) == 'amd' or \
                   str.lower(os.environ['CPU']) == 'opteron'):
