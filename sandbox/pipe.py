@@ -53,9 +53,9 @@ pipe_logger = logging.getLogger("pipe.py")
 pipe_logger.setLevel(logging.INFO)
 LOG = pipe_logger.log
 
-MACHINE_TYPE = ['personal', 'mcastle1', 'mcastle2', 'polymage'][3]
+MACHINE_TYPE = ['nehalem', 'mcastle1', 'piledriver', 'haswell'][3]
     
-if (MACHINE_TYPE == 'personal'):
+if (MACHINE_TYPE == 'nehalem'):
     #global IMAGE_ELEMENT_SIZE, L2_CACHE_SIZE, N_CORES, TILING_THRESHOLD, VECTOR_WIDTH_THRESHOLD
     #For Dekstop/Laptop Machine
     IMAGE_ELEMENT_SIZE = 4
@@ -76,7 +76,7 @@ elif (MACHINE_TYPE == 'mcastle1'): #Intel Haswell machine
     L1_CACHE_SIZE = int(32*1024/IMAGE_ELEMENT_SIZE)
     OUTER_DIM_TILING_THRESH = 4
     THRESHOLD_TILE_SIZE = 4
-elif (MACHINE_TYPE == 'polymage'): #Intel Haswell machine
+elif (MACHINE_TYPE == 'haswell'): #Intel Haswell machine
     #global IMAGE_ELEMENT_SIZE, L2_CACHE_SIZE, N_CORES, TILING_THRESHOLD, VECTOR_WIDTH_THRESHOLD
     #For mcastle
     IMAGE_ELEMENT_SIZE = 4
@@ -89,7 +89,7 @@ elif (MACHINE_TYPE == 'polymage'): #Intel Haswell machine
     L1_CACHE_SIZE = int(32*1024/IMAGE_ELEMENT_SIZE)
     OUTER_DIM_TILING_THRESH = 4
     THRESHOLD_TILE_SIZE = 4
-elif (MACHINE_TYPE == 'mcastle2'): #AMD Opteron machine
+elif (MACHINE_TYPE == 'piledriver'): #AMD Opteron family
     #global IMAGE_ELEMENT_SIZE, L2_CACHE_SIZE, N_CORES, TILING_THRESHOLD, VECTOR_WIDTH_THRESHOLD
     #For mcastle
     IMAGE_ELEMENT_SIZE = 4
@@ -1654,7 +1654,7 @@ class Pipeline:
         def get_dpfusion_weights (machine, is_inlining, is_heirarichal_tiling,
                                   is_multi_level_tiling):
             to_ret = {}
-            if (machine == 'polymage'):
+            if (machine == 'haswell'):
                 if is_inlining and is_heirarichal_tiling and is_multi_level_tiling:
                     to_ret["DIM_STD_DEV_WEIGHT"] = 1.5;
                     to_ret["LIVE_SIZE_TO_TILE_SIZE_WEIGHT"] = 1.0;
@@ -1703,7 +1703,8 @@ class Pipeline:
                     to_ret["CLEANUP_THREADS_WEIGHT"] =100.0;
                     to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5;
             
-            elif (machine == 'mcastle2'):
+            # AMD Opteron PileDriver
+            elif (machine == 'piledriver'):
                 if (is_multi_level_tiling):
                     global L2_CACHE_SIZE
                     #In case of multi level tiling L2_CACHE_SIZE is set to 256KB
@@ -1831,14 +1832,13 @@ class Pipeline:
             if (str.lower(os.environ['CPU']) == 'xeon' or \
                 str.lower(os.environ['CPU']) == 'intel' or \
                 str.lower(os.environ['CPU']) == 'haswell'):
-                MACHINE_TYPE = 'polymage'
+                MACHINE_TYPE = 'haswell'
             elif (str.lower(os.environ['CPU']) == 'amd' or \
                   str.lower(os.environ['CPU']) == 'opteron'):
-                MACHINE_TYPE = 'mcastle2'
-        else:
-            if 'dpfuse' in self._options:
-                raise Exception ("No CPU type set for DP Fusion. Set CPU type using " +\
-                                 "'export CPU=HASWELL' or 'export CPU=OPTERON'")
+                MACHINE_TYPE = 'piledriver'
+        elif 'dpfuse' in self._options:
+            print("[WARNING] CPU env variable not set; defaulting to Intel Xeon v3 Haswell")
+            MACHINE_TYPE = 'haswell'
                 
         ''' CONSTRUCT DAG '''
         # Maps from a compute object to its parents and children by
