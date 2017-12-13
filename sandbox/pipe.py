@@ -53,9 +53,9 @@ pipe_logger = logging.getLogger("pipe.py")
 pipe_logger.setLevel(logging.INFO)
 LOG = pipe_logger.log
 
-MACHINE_TYPE = ['personal', 'mcastle1', 'mcastle2', 'polymage'][3]
+MACHINE_TYPE = ['nehalem', 'mcastle1', 'piledriver', 'haswell'][3]
     
-if (MACHINE_TYPE == 'personal'):
+if (MACHINE_TYPE == 'nehalem'):
     #global IMAGE_ELEMENT_SIZE, L2_CACHE_SIZE, N_CORES, TILING_THRESHOLD, VECTOR_WIDTH_THRESHOLD
     #For Dekstop/Laptop Machine
     IMAGE_ELEMENT_SIZE = 4
@@ -76,7 +76,7 @@ elif (MACHINE_TYPE == 'mcastle1'): #Intel Haswell machine
     L1_CACHE_SIZE = int(32*1024/IMAGE_ELEMENT_SIZE)
     OUTER_DIM_TILING_THRESH = 4
     THRESHOLD_TILE_SIZE = 4
-elif (MACHINE_TYPE == 'polymage'): #Intel Haswell machine
+elif (MACHINE_TYPE == 'haswell'): #Intel Haswell machine
     #global IMAGE_ELEMENT_SIZE, L2_CACHE_SIZE, N_CORES, TILING_THRESHOLD, VECTOR_WIDTH_THRESHOLD
     #For mcastle
     IMAGE_ELEMENT_SIZE = 4
@@ -89,7 +89,7 @@ elif (MACHINE_TYPE == 'polymage'): #Intel Haswell machine
     L1_CACHE_SIZE = int(32*1024/IMAGE_ELEMENT_SIZE)
     OUTER_DIM_TILING_THRESH = 4
     THRESHOLD_TILE_SIZE = 4
-elif (MACHINE_TYPE == 'mcastle2'): #AMD Opteron machine
+elif (MACHINE_TYPE == 'piledriver'): #AMD Opteron family
     #global IMAGE_ELEMENT_SIZE, L2_CACHE_SIZE, N_CORES, TILING_THRESHOLD, VECTOR_WIDTH_THRESHOLD
     #For mcastle
     IMAGE_ELEMENT_SIZE = 4
@@ -1831,10 +1831,10 @@ class Pipeline:
             if (str.lower(os.environ['CPU']) == 'xeon' or \
                 str.lower(os.environ['CPU']) == 'intel' or \
                 str.lower(os.environ['CPU']) == 'haswell'):
-                MACHINE_TYPE = 'polymage'
+                MACHINE_TYPE = 'haswell'
             elif (str.lower(os.environ['CPU']) == 'amd' or \
                   str.lower(os.environ['CPU']) == 'opteron'):
-                MACHINE_TYPE = 'mcastle2'
+                MACHINE_TYPE = 'piledriver'
         else:
             if 'dpfuse' in self._options:
                 raise Exception ("No CPU type set for DP Fusion. Set CPU type using " +\
