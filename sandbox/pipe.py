@@ -1838,7 +1838,7 @@ class Pipeline:
         else:
             if 'dpfuse' in self._options:
                 raise Exception ("No CPU type set for DP Fusion. Set CPU type using " +\
-                                 "'export CPU = xeon' or 'export CPU = amd'")
+                                 "'export CPU=HASWELL' or 'export CPU=OPTERON'")
                 
         ''' CONSTRUCT DAG '''
         # Maps from a compute object to its parents and children by
