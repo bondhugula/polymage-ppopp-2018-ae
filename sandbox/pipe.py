@@ -1654,7 +1654,7 @@ class Pipeline:
         def get_dpfusion_weights (machine, is_inlining, is_heirarichal_tiling,
                                   is_multi_level_tiling):
             to_ret = {}
-            if (machine == 'polymage'):
+            if (machine == 'haswell'):
                 if is_inlining and is_heirarichal_tiling and is_multi_level_tiling:
                     to_ret["DIM_STD_DEV_WEIGHT"] = 1.5;
                     to_ret["LIVE_SIZE_TO_TILE_SIZE_WEIGHT"] = 1.0;
@@ -1703,7 +1703,8 @@ class Pipeline:
                     to_ret["CLEANUP_THREADS_WEIGHT"] =100.0;
                     to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5;
             
-            elif (machine == 'mcastle2'):
+            # AMD Opteron PileDriver
+            elif (machine == 'piledriver'):
                 if (is_multi_level_tiling):
                     global L2_CACHE_SIZE
                     #In case of multi level tiling L2_CACHE_SIZE is set to 256KB
@@ -1835,10 +1836,9 @@ class Pipeline:
             elif (str.lower(os.environ['CPU']) == 'amd' or \
                   str.lower(os.environ['CPU']) == 'opteron'):
                 MACHINE_TYPE = 'piledriver'
-        else:
-            if 'dpfuse' in self._options:
-                raise Exception ("No CPU type set for DP Fusion. Set CPU type using " +\
-                                 "'export CPU=HASWELL' or 'export CPU=OPTERON'")
+        elif 'dpfuse' in self._options:
+            print("[WARNING] CPU env variable not set; defaulting to Intel Xeon v3 Haswell")
+            MACHINE_TYPE = 'haswell'
                 
         ''' CONSTRUCT DAG '''
         # Maps from a compute object to its parents and children by
