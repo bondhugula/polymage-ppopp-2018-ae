@@ -32,6 +32,7 @@ except ImportError:
 import pygraphviz as pgv
 import targetc as genc
 from functools import reduce
+import os
 
 from grouping import *
 
@@ -1825,6 +1826,19 @@ class Pipeline:
         self._do_inline = 'inline' in self._options
         self._logMaxChildren = _logMaxChildren
         
+        #Choose correct MachineType
+        if ('CPU' in os.environ):
+            if (str.lower(os.environ['CPU']) == 'xeon' or \
+                str.lower(os.environ['CPU']) == 'intel'):
+                MACHINE_TYPE = 'polymage'
+            elif (str.lower(os.environ['CPU']) == 'amd' or \
+                  str.lower(os.environ['CPU']) == 'opteron'):
+                MACHINE_TYPE = 'mcastle2'
+        else:
+            if 'dpfuse' in self._options:
+                raise Exception ("No CPU type set for DP Fusion. Set CPU type using " +\
+                                 "'export CPU = xeon' or 'export CPU = amd'")
+                
         ''' CONSTRUCT DAG '''
         # Maps from a compute object to its parents and children by
         # backtracing starting from given live-out functions.
