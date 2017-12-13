@@ -1,14 +1,14 @@
-#CXX=icpc
-#CXX_FLAGS=-openmp -ipo -O3 -xhost #-no-vec
-CXX=g++
-CXX_FLAGS=-fopenmp -O3 -march=native -ftree-vectorize -funroll-loops
+CXX=icpc
+CXX_FLAGS=-openmp -ipo -O3 -xhost #-no-vec
+#CXX=g++
+#CXX_FLAGS=-fopenmp -O3 -march=native -ftree-vectorize -funroll-loops
 PYTHON=python3
 ROOT="../../../../"
 
 # app inputs
 IMG=$(ROOT)"/../images/venice_wikimedia.jpg"
 #IMG="./gray.png"
-RUNS=10
+RUNS=500
 
 APP_ARGS=--img=${IMG}
 OPT_ARGS=--pool-alloc --optimize-storage --early-free
