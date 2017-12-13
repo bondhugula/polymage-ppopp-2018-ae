@@ -1,5 +1,5 @@
 #CXX=icpc
-#CXX_FLAGS=-openmp -ipo -O3 -xhost -ansi-alias
+#CXX_FLAGS=-qopenmp -ipo -O3 -xhost -ansi-alias
 CXX=g++
 CXX_FLAGS=-fopenmp -O3 -march=native -ftree-vectorize
 PYTHON=python3
