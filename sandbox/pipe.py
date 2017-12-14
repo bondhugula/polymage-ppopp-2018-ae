@@ -1471,7 +1471,7 @@ class Group:
                     
                     threshold_tile_size_met = True
                     for i in tile_sizes.keys ():
-                        if tile_sizes[i] <= 2:
+                        if tile_sizes[i] <= 3:
                             threshold_tile_size_met = False
                             break
                 else:
