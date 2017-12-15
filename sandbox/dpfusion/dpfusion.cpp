@@ -2950,7 +2950,7 @@ PyObject* dpgroup(PyObject* self, PyObject* args)
     
     std::vector <PyObject*> pygroups_vector;
     
-    std::cerr<<"Running DP Fusion " << std::endl;
+    std::cerr<<"--------DP Fusion--------" << std::endl;
     
     PyArg_ParseTuple (args, "OOOOOOOOOOOOOOOOllllffffOl", &in_group, &out_group, &groups, &pipeline, 
                       &reduction_cls, &small_comps, &comp_size_map, &tstencil_cls,
@@ -2977,8 +2977,8 @@ PyObject* dpgroup(PyObject* self, PyObject* args)
     "LIVE_SIZE_TO_TILE_SIZE_WEIGHT " << LIVE_SIZE_TO_TILE_SIZE_WEIGHT << std::endl << 
     "CLEANUP_THREADS_WEIGHT        " << CLEANUP_THREADS_WEIGHT        << std::endl <<
     "RELATIVE_OVERLAP_WEIGHT       " << RELATIVE_OVERLAP_WEIGHT       << std::endl << std::endl;
-                      
-    get_overlapping_size_func = PyObject_GetAttr (pipeline, 
+    
+   get_overlapping_size_func = PyObject_GetAttr (pipeline, 
                                                   Py_BuildValue ("s", 
                                                   "get_overlapping_size_for_groups"));
     if (_printDPFusionTimeAndChoices == Py_True)
@@ -3013,6 +3013,8 @@ PyObject* dpgroup(PyObject* self, PyObject* args)
         std::cerr << "MULTI_LEVEL_TILING ENABLED" << std::endl;
     else
         std::cerr << "MULTI_LEVEL_TILING DISABLED" << std::endl;
+ 
+    std::cerr << std::endl << "-----Running DPFusion-----" << std::endl;            
     
     if (PyList_Size (in_group) == 1)
     {
