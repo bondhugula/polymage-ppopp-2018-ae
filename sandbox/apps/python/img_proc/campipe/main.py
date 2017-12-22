@@ -36,12 +36,13 @@ def main():
         # create shared lib
         create_lib(build_campipe, app, app_data)
         min_avg = 100000
-        outer_runs = 5
-        for t in range (0, outer_runs):
+        nsamples = 5
+        print("[main] Benchmarking (%d samples)" %nsamples)
+        for t in range (0, nsamples):
             # execute the compiled pipeline
             min_avg = min (min_avg, campipe(app_data))
         
-        print ("[main] Minimum of averaged times across ", outer_runs,
+        print ("[main] Minimum of averaged times across ", nsamples,
                 "samples: ", min_avg, " ms")
 
     return

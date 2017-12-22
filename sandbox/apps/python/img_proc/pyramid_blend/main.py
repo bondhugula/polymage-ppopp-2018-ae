@@ -35,10 +35,11 @@ def main():
     else:
         create_lib(build_pyramid, app, app_data)
         min_avg = 100000
-        outer_runs = 5
-        for r in range (0, outer_runs):
+        nsamples = 5
+        print("[main] Benchmarking (%d samples)" %nsamples)
+        for r in range (0, nsamples):
             min_avg = min (min_avg, pyramid_blending(app_data))
-        print ("[main] Minimum of averaged times across ", outer_runs,
+        print ("[main] Minimum of averaged times across ", nsamples,
                 "runs: ", min_avg, " ms")
 
     return

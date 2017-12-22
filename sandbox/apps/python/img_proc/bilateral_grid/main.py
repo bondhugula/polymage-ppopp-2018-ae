@@ -39,6 +39,7 @@ def main():
         # input ("wait to run amplxe " + str(os.getpid()))
         # input ("wwww")
         nsamples = 5
+        print("[main] Benchmarking (%d samples)" %nsamples)
         for t in range(0, nsamples):
             min_avg = min (min_avg, bilateralgrid(app_data))
         print ("[main] Minimum of averaged times across ", nsamples,

@@ -35,11 +35,12 @@ def main():
     else:
         create_lib(build_interpolate, app, app_data)
         min_avg = 10000
-        outer_runs = 5
-        for t in range(0, outer_runs):
+        nsamples = 5
+        print("[main] Benchmarking (%d samples)" %nsamples)
+        for t in range(0, nsamples):
             min_avg = min (min_avg, interpolate(app_data))
         
-        print ("[main] Minimum of averaged times across ", outer_runs,
+        print ("[main] Minimum of averaged times across ", nsamples,
                 "runs: ", min_avg, " ms")
 
     return
