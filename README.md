@@ -1,6 +1,6 @@
 **LICENSE**
 
-PolyMage is available under the Apache License, version 2.0. Please see 
+PolyMage is available under the Apache License version 2.0. Please see 
 the LICENSE file for details.
 
 **REQUIREMENTS**
@@ -11,29 +11,31 @@ the LICENSE file for details.
 (on a Fedora) $ sudo yum -y install python3-numpy python3-pytest  
 (on Ubuntu) $ sudo apt-get install python3-numpy python3-pytest  
 
-3) OpenCV 2.4.7 or higher (with QT/GTK support, video codec support for the video demo),  
-Python bindings for OpenCV. Install instructions on Ubuntu: https://help.ubuntu.com/community/OpenCV  
-If you don't have a GPU on your machine, be sure to call cmake with the option -D WITH_CUDA=OFF  
-On a Fedora, these can be installed with 'sudo yum -y install opencv python-opencv'
+3) OpenCV 2.4.7 or higher (with QT/GTK support, video codec support for 
+the video demo),  Python bindings for OpenCV. Install instructions on 
+Ubuntu: https://help.ubuntu.com/community/OpenCV  If you don't have a 
+GPU on your machine, be sure to call cmake with the option -D 
+WITH_CUDA=OFF  On a Fedora, these can be installed with 'sudo yum -y 
+install opencv python-opencv'
 
-4) g++ (GNU C++ compiler) version 4.8 or higher or Intel C/C++ compiler (icpc) 12.0 or higher  
-(recommended: icpc 14.0 or higher)
+4) g++ (GNU C++ compiler) version 4.8 or higher or Intel C/C++ compiler 
+(icpc) (recommended: icpc 15.0 or higher)
 
-5) Python bindings for isl  
-islpy http://documen.tician.de/islpy/  
-This can be easily installed via python3-pip  
-```
+5) Python bindings for isl: islpy http://documen.tician.de/islpy/  
+This can be easily installed via python3-pip  ```
 $ sudo yum -y install python3-pip  
 $ sudo pip3 install islpy  
 ```
 (islpy itself requires ffi development files -- this can be installed by 
 installing libffi-devel via yum/apt-get)
 
-6) The video demo (sandbox/video_demo) has additional requirements; see sandbox/video_demo/README.md
+6) The video demo (sandbox/video_demo) has additional requirements; see 
+sandbox/video_demo/README.md
 
 7) Boost C++ Libraries version 1.3 or higher
 
 **INSTALLATION**
+
 ```
 $ git clone git@bitbucket.org:udayb/polymage.git
 $ cd polymage
