@@ -8,7 +8,7 @@ ROOT="../../../../"
 # app inputs
 IMG=$(ROOT)"/../images/gray.png"
 #IMG="./gray.png"
-RUNS=10
+RUNS=500
 
 APP_ARGS=--img=${IMG}
 OPT_ARGS=--pool-alloc --optimize-storage --early-free

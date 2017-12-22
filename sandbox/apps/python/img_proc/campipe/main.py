@@ -42,7 +42,7 @@ def main():
             min_avg = min (min_avg, campipe(app_data))
         
         print ("[main] Minimum of averaged times across ", outer_runs,
-                "runs: ", min_avg, " ms")
+                "samples: ", min_avg, " ms")
 
     return
 

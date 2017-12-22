@@ -38,11 +38,11 @@ def main():
         min_avg = 10000
         # input ("wait to run amplxe " + str(os.getpid()))
         # input ("wwww")
-        outer_runs = 5
-        for t in range(0, outer_runs):
+        nsamples = 5
+        for t in range(0, nsamples):
             min_avg = min (min_avg, bilateralgrid(app_data))
-        print ("[main] Minimum of averaged times across ", outer_runs,
-                "runs: ", min_avg, " ms")
+        print ("[main] Minimum of averaged times across ", nsamples,
+                "samples: ", min_avg, " ms")
 
     return
 
