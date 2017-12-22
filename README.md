@@ -22,7 +22,8 @@ install opencv python-opencv'
 (icpc) (recommended: icpc 15.0 or higher)
 
 5) Python bindings for isl: islpy http://documen.tician.de/islpy/  
-This can be easily installed via python3-pip  ```
+This can be easily installed via python3-pip  
+```
 $ sudo yum -y install python3-pip  
 $ sudo pip3 install islpy  
 ```
