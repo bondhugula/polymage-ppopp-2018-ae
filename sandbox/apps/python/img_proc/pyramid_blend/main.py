@@ -40,7 +40,7 @@ def main():
         for r in range (0, nsamples):
             min_avg = min (min_avg, pyramid_blending(app_data))
         print ("[main] Minimum of averaged times across ", nsamples,
-                "runs: ", min_avg, " ms")
+                "samples: ", min_avg, " ms")
 
     return
 

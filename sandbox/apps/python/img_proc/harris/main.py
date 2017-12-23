@@ -39,7 +39,7 @@ def main():
         for i in range (0, outer_runs):
             _m = min (_m, harrispipe(app_data))
         print ("[main] Minimum of averaged times across ", outer_runs,
-                "runs: ", _m, " ms")
+                "samples: ", _m, " ms")
     return
 
 main()
