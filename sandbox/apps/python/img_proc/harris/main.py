@@ -36,10 +36,10 @@ def main():
     else:
         create_lib(build_harris, app, app_data)
         _m = 10000000
-        outer_runs = 5;
-        for i in range (0, outer_runs):
+        nsamples = 5;
+        for i in range (0, nsamples):
             _m = min (_m, harrispipe(app_data))
-        print ("[main] Minimum of averaged times across ", outer_runs,
+        print ("[main] Minimum of averaged times across ", nsamples,
                 "samples: ", _m, " ms")
     return
 
