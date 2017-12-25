@@ -432,7 +432,13 @@ def execute(_tuner_arg_data):
     except KeyError:
         _tuner_configs_count = 0
 
-    _tuner_omp_threads = os.environ["OMP_NUM_THREADS"]
+    try:
+        _tuner_omp_threads = os.environ["OMP_NUM_THREADS"]
+    except KeyError:
+        try:
+            _tuner_omp_threads = _tuner_arg_data['_tuner_omp_threads']
+        except KeyError:
+            _tuner_omp_threads = 1
 
     if _tuner_omp_threads == "":
         try:
