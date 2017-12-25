@@ -31,7 +31,8 @@ def main():
                         print ("Running for iteration #", t)
                         harrispipe(app_data)
     elif app_data['mode'] == 'tune':
-        pass
+        print("Tuning")
+        auto_tune(app_data)
     else:
         create_lib(build_harris, app, app_data)
         _m = 10000000
