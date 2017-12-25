@@ -33,7 +33,7 @@ def auto_tune(app_data):
     dst_path = "/tmp"
 
     #group_size_configs = [3, 5, 7, 9, 10]
-    group_size_configs = [10]
+    group_size_configs = [4]
     #group_size_configs = [1]
 
     tile_size_configs = []
@@ -100,7 +100,7 @@ def auto_tune(app_data):
                    "_tuner_src_path": _tuner_src_path, # optional
                    "_tuner_configs_count": _tuner_configs_count, # optional
                    "_tuner_omp_threads": 4, # optional
-                   "_tuner_nruns": 1, # optional
+                   "_tuner_nruns": 10, # optional
                    "_tuner_debug_flag": True, # optional
                    #"_tuner_custom_executor": minimal_exec_mg,
                    "_tuner_app_data": app_data
