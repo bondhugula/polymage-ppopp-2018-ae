@@ -50,7 +50,7 @@ from storage_mapping import *
 
 # LOG CONFIG #
 pipe_logger = logging.getLogger("pipe.py")
-pipe_logger.setLevel(logging.INFO)
+pipe_logger.setLevel(logging.DEBUG-1)
 LOG = pipe_logger.log
 
 MACHINE_TYPE = ['nehalem', 'mcastle1', 'piledriver', 'haswell'][3]
@@ -1522,7 +1522,7 @@ class Group:
                 LOG (logging.DEBUG, "tile_size_less_than_l1=True tile_sizes from L1 " + str(l1tile_sizes) + " cores " + str(cores))
                 return l1tile_size
             
-            if (l1tile_sizes == -1):
+            if (l1tile_sizes != -1):
                 overlap_shift_greater = False
                 overlap_shifts = {}
                 for i in l1tile_sizes.keys ():
@@ -1548,7 +1548,7 @@ class Group:
                 last_dim = len(dim_reuse) - 1
                 LOG (logging.DEBUG, "not overlap greater total_used_size " + str(total_used_size) + " tile_size " + str(tile_size))
                 
-                if (tile_size < 2*L2_CACHE_SIZE or last_dim not in l1tile_sizes or 
+                if (True or tile_size < 2*L2_CACHE_SIZE or last_dim not in l1tile_sizes or 
                     len([d for d in dim_reuse if d > 0]) == 0):
                     #if tile size is less than L2 cache then return the L1 tile size
                     #no need of making code more complex, such a program will 
@@ -1579,6 +1579,7 @@ class Group:
             else:
                 #overlap size is greater than L1, hence, generate an L2 tile size
                 #and then generate an L1 tile size
+                LOG (logging.DEBUG, "overlap size greater overlap_shifts " + str(overlap_shifts))
                 tile_sizes, tile_size = self.get_tile_sizes_for_cache_size (param_estimates, 
                     slope_min, slope_max, group_parts, dim_reuse, dim_sizes, 
                     L2_CACHE_SIZE, L2_INNER_MOST_DIM_SIZE, N_CORES)
@@ -1905,7 +1906,7 @@ class Pipeline:
             a = set(self._inline_directives)
             b = set(group_funcs)
             assert a.isdisjoint(b)
-
+        
         #self.dim_reuse_for_each_group ()
         ''' GROUPING '''
         # TODO check grouping validity

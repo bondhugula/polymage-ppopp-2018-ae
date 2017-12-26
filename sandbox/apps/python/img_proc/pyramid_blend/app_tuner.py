@@ -30,8 +30,8 @@ def auto_tune(app_data):
     
     dst_path = "/tmp"
 
-    group_size_configs = [3, 5, 7, 9, 10]
-
+    group_size_configs = [int(i*32) for i in [0.2, 0.4, 0.5]]
+    
     tile_size_configs = []
 
     tile_size_configs.append([64, 256])

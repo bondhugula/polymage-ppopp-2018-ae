@@ -4,10 +4,10 @@ import sys
 sys.path.insert(0, ROOT+'apps/python/')
 
 from cpp_compiler import *
-from constructs import *
-from compiler import *
+from constructs import * #
+from compiler import * #
 import tuner
-from polymage_campipe import camera_pipe
+from polymage_bilateral_grid import bilateral_grid
 
 def auto_tune(app_data):
     pipe_data = app_data['pipe_data']
@@ -15,8 +15,8 @@ def auto_tune(app_data):
     app_name = app_data['app']
     pipe_name = app_data['app']
 
-    out_campipe, iniline_fn = camera_pipe(pipe_data)
-    live_outs = [out_campipe]
+    out_harrispipe = bilateral_grid(pipe_data)
+    live_outs = [out_harrispipe]
     
     R = pipe_data['R']
     C = pipe_data['C']
@@ -30,7 +30,7 @@ def auto_tune(app_data):
     
     dst_path = "/tmp"
 
-    group_size_configs = [int(i*32) for i in [0.2, 0.4, 0.5]]
+    group_size_configs = [int(i*7) for i in [0.2, 0.4, 0.5]]
 
     tile_size_configs = []
 
@@ -38,7 +38,6 @@ def auto_tune(app_data):
     tile_size_configs.append([64, 128])
 
     tile_size_configs.append([32, 512])
-
     tile_size_configs.append([32, 256])
     tile_size_configs.append([32, 128])
     tile_size_configs.append([32, 64])
@@ -63,6 +62,8 @@ def auto_tune(app_data):
         opts += ['optimize_storage']
     if app_data['pool_alloc']:
         opts += ['pool_alloc']
+    if app_data['dpfuse']:
+        opts += ['dpfuse']
 
     gen_compile_string(app_data)
     cxx_string = app_data['cxx_string']
@@ -71,7 +72,6 @@ def auto_tune(app_data):
     # ============================
 
     gen_config = {"_tuner_app_name": app_name,
-                  "_tuner_pipe_name": pipe_name, # optional
                   "_tuner_live_outs": live_outs,
                   "_tuner_param_constraints": param_constraints, #optional
                   "_tuner_param_estimates": param_estimates, #optional
@@ -89,7 +89,7 @@ def auto_tune(app_data):
         tuner.generate(gen_config)
 
     '''
-    _tuner_src_path = '/tmp/PolyEzSz1jRLRPMage/'
+    _tuner_src_path = '/tmp/PolycNUUEYoLt2Mage'
     _tuner_configs_count = 75
     _tuner_pipe = buildPipeline(live_outs)
     '''
@@ -97,30 +97,18 @@ def auto_tune(app_data):
     img_data = app_data['img_data']
     IN = img_data['IN']
     OUT = img_data['OUT']
-    M3200 = img_data['M3200']
-    M7000 = img_data['M7000']
-
-    app_args = app_data['app_args']
-    colour_temp = float(app_args.colour_temp)
-    contrast = float(app_args.contrast)
-    gamma = float(app_args.gamma)
 
     pipe_args = {}
-    pipe_args['R'] = rows
-    pipe_args['C'] = cols
-    pipe_args['colour_temp'] = colour_temp
-    pipe_args['contrast'] = contrast
-    pipe_args['gamma'] = gamma
-    pipe_args['matrix_3200'] = M3200
-    pipe_args['matrix_7000'] = M7000
-    pipe_args['img'] = IN 
-    pipe_args['process'] = OUT 
+    pipe_args['R'] = pipe_args['rows'] = rows
+    pipe_args['C'] = pipe_args['cols'] = cols
+    pipe_args['img'] = pipe_args['input'] = IN 
+    pipe_args['bilateral_grid'] = pipe_args['filtered'] = OUT 
+
 
     # Execute the generated variants
     # ==============================
 
     exec_config = {"_tuner_app_name": app_name,
-                   "_tuner_pipe_name": pipe_name, # optional
                    "_tuner_pipe": _tuner_pipe,
                    "_tuner_pipe_arg_data": pipe_args,
                    "_tuner_src_path": _tuner_src_path, # optional

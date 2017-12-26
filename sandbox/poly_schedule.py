@@ -661,7 +661,8 @@ def overlap_tile(pipeline, group, group_parts, slope_min, slope_max):
                     if val >= group.tile_sizes[i-1]:
                         tile = True
                 else:
-                    if val > pipeline._tile_sizes[num_tile_dims]:
+                    if num_tile_dims < len (pipeline._tile_sizes) and \
+                        val > pipeline._tile_sizes[num_tile_dims]:
                         tile = True
                 
             else:

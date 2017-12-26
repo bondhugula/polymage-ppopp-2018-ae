@@ -8,7 +8,7 @@ from init import init_all
 from printer import print_header, print_config, print_line
 from builder import create_lib,build_interpolate
 from exec_pipe import interpolate
-#from app_tuner import auto_tune
+from app_tuner import auto_tune
 
 app = "multiscale_interpolate"
 
@@ -31,7 +31,8 @@ def main():
                         print ("Running for iteration #", t)
                         interpolate(app_data)
     elif app_data['mode'] == 'tune':
-        pass
+        print ("Tuning")
+        auto_tune (app_data)
     else:
         create_lib(build_interpolate, app, app_data)
         min_avg = 10000
