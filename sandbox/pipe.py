@@ -1659,49 +1659,49 @@ class Pipeline:
                     to_ret["DIM_STD_DEV_WEIGHT"] = 1.5;
                     to_ret["LIVE_SIZE_TO_TILE_SIZE_WEIGHT"] = 1.0;
                     to_ret["CLEANUP_THREADS_WEIGHT"] = 100.0;
-                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5;
+                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5/1.6;
                     
                 elif is_inlining and is_heirarichal_tiling:
                     to_ret["DIM_STD_DEV_WEIGHT"] = 1.5;
                     to_ret["LIVE_SIZE_TO_TILE_SIZE_WEIGHT"] = 1.0;
                     to_ret["CLEANUP_THREADS_WEIGHT"] = 100.0;
-                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5;
+                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5/1.6;
                     
                 elif is_inlining and is_multi_level_tiling:
                     to_ret["DIM_STD_DEV_WEIGHT"] = 1.5;
                     to_ret["LIVE_SIZE_TO_TILE_SIZE_WEIGHT"] = 1.5;
                     to_ret["CLEANUP_THREADS_WEIGHT"] = 100.0;
-                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0/1.5;
+                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0/1.5/1.6;
                 
                 elif is_multi_level_tiling and is_heirarichal_tiling:
                     to_ret["DIM_STD_DEV_WEIGHT"] = 1.5;
                     to_ret["LIVE_SIZE_TO_TILE_SIZE_WEIGHT"] = 1.0;
                     to_ret["CLEANUP_THREADS_WEIGHT"] = 100.0;
-                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5;
+                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5/1.6;
                     
                 elif is_inlining:
                     to_ret["DIM_STD_DEV_WEIGHT"] = 1.5;
                     to_ret["LIVE_SIZE_TO_TILE_SIZE_WEIGHT"] = 1.0;
                     to_ret["CLEANUP_THREADS_WEIGHT"] = 100.0;
-                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5;
+                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5/1.6;
                     
                 elif is_heirarichal_tiling:
                     to_ret["DIM_STD_DEV_WEIGHT"] = 1.5;
                     to_ret["LIVE_SIZE_TO_TILE_SIZE_WEIGHT"] = 1.0;
                     to_ret["CLEANUP_THREADS_WEIGHT"] = 100.0;
-                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5;
+                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5/1.6;
                     
                 elif is_multi_level_tiling:
                     to_ret["DIM_STD_DEV_WEIGHT"] = 1.5;
                     to_ret["LIVE_SIZE_TO_TILE_SIZE_WEIGHT"] = 1.5;
                     to_ret["CLEANUP_THREADS_WEIGHT"] = 100.0;
-                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0/1.5;
+                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0/1.5/1.6;
                     
                 else:
                     to_ret["DIM_STD_DEV_WEIGHT"] = 1.5;
                     to_ret["LIVE_SIZE_TO_TILE_SIZE_WEIGHT"] = 1.0;
                     to_ret["CLEANUP_THREADS_WEIGHT"] =100.0;
-                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5;
+                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5/1.6;
             
             # AMD Opteron PileDriver
             elif (machine == 'piledriver'):
@@ -1714,49 +1714,49 @@ class Pipeline:
                     to_ret["DIM_STD_DEV_WEIGHT"] = 1.5
                     to_ret["LIVE_SIZE_TO_TILE_SIZE_WEIGHT"] = 1.0
                     to_ret["CLEANUP_THREADS_WEIGHT"] = 100.0
-                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5
+                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5/1.6
                     
                 elif is_inlining and is_heirarichal_tiling:
                     to_ret["DIM_STD_DEV_WEIGHT"] = 1.5
                     to_ret["LIVE_SIZE_TO_TILE_SIZE_WEIGHT"] = 1.0
                     to_ret["CLEANUP_THREADS_WEIGHT"] = 100.0
-                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5
+                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5/1.6
                     
                 elif is_inlining and is_multi_level_tiling:
                     to_ret["DIM_STD_DEV_WEIGHT"] = 2.0
                     to_ret["LIVE_SIZE_TO_TILE_SIZE_WEIGHT"] = 1.0
                     to_ret["CLEANUP_THREADS_WEIGHT"] = 100.0
-                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0/1.2
+                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0/1.2/1.6
                 
                 elif is_multi_level_tiling and is_heirarichal_tiling:
                     to_ret["DIM_STD_DEV_WEIGHT"] = 1.5
                     to_ret["LIVE_SIZE_TO_TILE_SIZE_WEIGHT"] = 1.0
                     to_ret["CLEANUP_THREADS_WEIGHT"] = 100.0
-                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5
+                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5/1.6
                     
                 elif is_inlining:
                     to_ret["DIM_STD_DEV_WEIGHT"] = 1.5
                     to_ret["LIVE_SIZE_TO_TILE_SIZE_WEIGHT"] = 1.0
                     to_ret["CLEANUP_THREADS_WEIGHT"] = 100.0
-                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5
+                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5/1.6
                     
                 elif is_heirarichal_tiling:
                     to_ret["DIM_STD_DEV_WEIGHT"] = 1.5
                     to_ret["LIVE_SIZE_TO_TILE_SIZE_WEIGHT"] = 1.0
                     to_ret["CLEANUP_THREADS_WEIGHT"] = 100.0
-                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5
+                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5/1.6
                     
                 elif is_multi_level_tiling:
                     to_ret["DIM_STD_DEV_WEIGHT"] = 2.0
                     to_ret["LIVE_SIZE_TO_TILE_SIZE_WEIGHT"] = 1.0
                     to_ret["CLEANUP_THREADS_WEIGHT"] = 100.0
-                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0/1.2
+                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0/1.2/1.6
                     
                 else:
                     to_ret["DIM_STD_DEV_WEIGHT"] = 2.0
                     to_ret["LIVE_SIZE_TO_TILE_SIZE_WEIGHT"] = 0.3
                     to_ret["CLEANUP_THREADS_WEIGHT"] = 100.0
-                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5
+                    to_ret["RELATIVE_OVERLAP_WEIGHT"] = 1000.0*50.0*1.5/1.6
             else:
                 raise Exception ("Unknown Machine. Enter Weights for the new machine")
                 
@@ -2018,19 +2018,23 @@ class Pipeline:
                             str([g.comps[0].func.name for g in groups]))
         img1 = False
         img2 = False
-
+        all_source_nodes = []
+        
         for g in groups:
+            if (not g.parents):
+                all_source_nodes += [g]
             if (g.comps[0].func.name.find("img1") != -1):
                 img1 = True
             elif (g.comps[0].func.name.find("img2") != -1):
                 img2 = True
-            
-        if (img1 and img2):
-            #TODO: Special Case for Pyramid Blend. Otherwise, it groups Dx_img1 and
-            #Dx_img2, which should not happen since both takes different input images.
-            #However, in Harris it is good to group both Ix and Iy group as they
-            #take same input images.
-            return -1, 0
+        
+        if (all_source_nodes):
+            image_refs = set ()
+            for g in all_source_nodes:
+                image_refs = image_refs.union(set(g.image_refs))
+        
+            if (len (image_refs) > 1):
+                return -1, 0
                 
         g = self.create_group (groups, inlined_comps)
         g.set_total_used_size (tile_size)
@@ -2104,7 +2108,7 @@ class Pipeline:
                             
             LOG (logging.DEBUG, "overlap_shift " + str(overlap_shift) + \
                                 str (" det_tile_size ") + str(det_tile_size))
-            return overlap_shift/1.6, det_tile_size
+            return overlap_shift, det_tile_size
             
         if len (comp_deps) <= 0:
             return 1 << 30, 1
