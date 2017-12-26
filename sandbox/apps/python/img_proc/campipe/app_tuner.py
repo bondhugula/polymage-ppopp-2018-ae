@@ -126,7 +126,7 @@ def auto_tune(app_data):
                    "_tuner_src_path": _tuner_src_path, # optional
                    "_tuner_configs_count": _tuner_configs_count, # optional
                    "_tuner_omp_threads": 4, # optional
-                   "_tuner_nruns": 1, # optional
+                   "_tuner_nruns": int(app_data['app_args'].runs), # optional
                    "_tuner_debug_flag": True, # optional
                    #"_tuner_custom_executor": minimal_exec_mg,
                    "_tuner_app_data": app_data
