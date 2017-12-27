@@ -50,7 +50,7 @@ from storage_mapping import *
 
 # LOG CONFIG #
 pipe_logger = logging.getLogger("pipe.py")
-pipe_logger.setLevel(logging.DEBUG-1)
+pipe_logger.setLevel(logging.INFO)
 LOG = pipe_logger.log
 
 MACHINE_TYPE = ['nehalem', 'mcastle1', 'piledriver', 'haswell'][3]
